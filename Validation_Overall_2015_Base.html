@@ -32,125 +32,22 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
 
+	<!-- Jquery JS -->
+	<script src="http://code.jqiery.com/jquery.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
+	<!-- Leaflet JS -->
+	<link rel="stylesheet" href="leaflet/leaflet.css">
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		  
+		   
 	
 	<link rel="stylesheet" href="leaflet/leaflet.css"/>
 	<script src="leaflet/leaflet.js"></script> 
 	<script src="js/l.control.geosearch.js"></script>
 	<script src="js/l.geosearch.provider.google.js"></script>
     <link rel="stylesheet" href="css/l.geosearch.css"/>
-<script>
 
-
-var simplemaps_statemap_mapdata={
-  map_name:"County Map",
-    initial_view:{
-    y:-60,
-    x:-100,
-    y2:920,
-    x2:2200,
-  },
-  main_settings: {
-    //General settings
-		width: "responsive", //or 'responsive'
-    background_color: "#FFFFFF",
-    background_transparent: "yes",
-    popups: "detect",
-    
-		//State defaults
-		state_description: "State description",
-    state_color: "#abafb3",
-    state_hover_color: "#3B729F",
-    border_size: 1.5,
-    border_color: "#ffffff",
-    all_states_inactive: "no",
-    all_states_zoomable: "no",
-    
-    
-		//Label defaults
-		label_color: "#ffffff",
-    label_hover_color: "#ffffff",
-    label_size: 22,
-    label_font: "Arial",
-    hide_labels: "no",
-    hide_eastern_labels: false,
-   
-		//Zoom settings
-		manual_zoom: "yes",
-    back_image: "no",
-    arrow_box: "no",
-    navigation_size: "40",
-    navigation_color: "#f7f7f7",
-    navigation_border_color: "#636363",
-    initial_back: "no",
-    initial_zoom: -1,
-    initial_zoom_solo: "no",
-    region_opacity: 1,
-    region_hover_opacity: 0.6,
-    zoom_out_incrementally: "yes",
-    zoom_percentage: 0.99,
-    zoom_time: 0.5,
-
-    
-		//Popup settings
-		popup_color: "white",
-    popup_opacity: 0.9,
-    popup_shadow: 1,
-    popup_corners: 5,
-    popup_font: "12px/1.5 Verdana, Arial, Helvetica, sans-serif",
-    popup_nocss: "no",
-    
-		//Advanced settings
-		div: "map",
-    auto_load: "yes",
-    rotate: "0",
-    url_new_tab: "yes",
-    images_directory: "default",
-    import_labels: "no",
-    fade_time: 0.1,
-    link_text: "View Website"
-  },
-  state_specific: {
-      "12057": {
-      name: "Hillsborough",
-      description: "default",
-      color: "pink",
-      hover_color: "default",
-      url: "default"
-    },
-        "12017": {
-      name: "Citrus",
-      description: "default",
-      color: "pink",
-      hover_color: "default",
-      url: "default"
-    },
-        "12053": {
-      name: "Hernando",
-      description: "default",
-      color: "pink",
-      hover_color: "default",
-      url: "default"
-    },
-        "12101": {
-      name: "Pasco",
-      description: "default",
-      color: "pink",
-      hover_color: "default",
-      url: "default"
-    },
-    "12103": {
-      name: "Pinellas",
-      description: "Pinellas",
-      color: "pink",
-      hover_color: "default",
-      url: "default"
-    },
-   }
-};
-
-
-</script>
-<script src="js/statemap.js"></script>
 
 <!-- Main Style -->
     <link rel="stylesheet" href="css/ftocount_v3.1.css"/>
@@ -383,22 +280,27 @@ tr {
     </ul>
   </div>
 
-<div class="map" id="map_FL">
-			<h1>County Map</h1>
-			<div style="width: 620px"> 
-				<div id="map">     
-        
+  <div id= "search-bar" >
+<div class="container" >
+	<div class="row">
+        <div class="col-md-6">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="form-control input-lg" placeholder="Please enter the TAZ number"  id="mySearch"/>
+                    <span class="input-group-btn"  >
+                        <button class="btn btn-info btn-lg" type="button" >
+                            <i class="glyphicon glyphicon-search" style="color:white;" onclick="returnTAZ ()" >  </i> 
+                        </button>
+                    </span>
+                </div>
         </div>
 
-<div class="clearfix">
-  <div class="box" style="background-color:white">
-  </div>
-</div>
-<div class="clearfix">
-  <div class="box_1" style="background-color:white">
-  </div>
-</div>
 
+  </div>
+</div>
+  </div>
+</div>
+<div class="map" id="map"> </div>
 </div>
 </div>
     <header class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
@@ -429,6 +331,55 @@ tr {
     <canvas id="myChart_2" style="width:100%;max-width:500px"></canvas>
     </div>
 
+<script>
+    
+    var map = L.map('map').setView([28.276140, -82.585263], 9);
+	
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 15
+    }).addTo(map);
+	
+	var hillsborough = L.icon({
+	iconUrl: 'images/County/hillsborough.png',
+	iconSize: [70,35],
+});
+
+     L.marker([28.039646, -82.420602],{icon: hillsborough}).addTo(map).bindPopup('Hillsborough:  V/C:0.96  RMSE:88.20');
+	 
+		var pinellas = L.icon({
+	iconUrl: 'images/County/pinellas.png',
+	iconSize: [70,35],
+
+});
+
+     L.marker([27.907086, -82.759073],{icon: pinellas}).addTo(map).bindPopup('Pinellas:  V/C:0.99  RMSE:40.45');;
+	 
+	var pasco = L.icon({
+	iconUrl: 'images/County/pasco.png',
+	iconSize: [60,60],
+});
+     L.marker([28.295848, -82.471609],{icon: pasco}).addTo(map).bindPopup('Pasco:  V/C:0.90  RMSE:32.30');;	 
+	 
+	 	var hernando = L.icon({
+	iconUrl: 'images/County/hernando.png',
+	iconSize: [60,60],
+});
+
+     L.marker([28.566409, -82.471609],{icon: hernando}).addTo(map).bindPopup('Hernando:  V/C:1.11  RMSE:25.34');;
+	 
+	 	var citrus = L.icon({
+	iconUrl: 'images/County/citrus.png',
+	iconSize: [60,60],
+});
+
+     L.marker([28.785449, -82.471609],{icon: citrus}).addTo(map).bindPopup('Citrus:  V/C:1.04  RMSE:20.18');;
+	 
+	 
+	 
+</script>
+
 
 
 <script>
@@ -440,8 +391,9 @@ new Chart("myChart_1", {
   data: {
 	labels:xValues,
     datasets: [{
-      data: yValues
+      data: yValues,
     }]
+
   },
   bar: {
         width: {
@@ -487,7 +439,7 @@ new Chart("myChart_1", {
 });
 
 var xValues1 = ['0-5,000','5,000-10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-50,000','50,000-60,000','60,000+'];
-var yValues1=['88','40','32','25','20','17','13','14'];
+var yValues1=['88.20','40.45','32.30','25.34','20.18','17.42','12.67','13.50'];
 
 new Chart("myChart_2", {
   type: "bar",
@@ -597,56 +549,56 @@ new Chart("myChart_2", {
       <td>2,084</td>
       <td>5,915,215</td>
       <td>5,408,113</td>
-      <td>88</td>
+      <td>88.20</td>
     </tr>
     <tr>
       <td>5,000-10,000</td>
       <td>1,173</td>
       <td>7,822,324</td>
       <td>8,313,030</td>
-      <td>40</td>
+      <td>40.45</td>
     </tr>
     <tr>
       <td>10,000-15,000</td>
       <td>646</td>
       <td>7,715,732</td>
       <td>7,873,798</td>
-      <td>32</td>
+      <td>32.30</td>
     </tr>
     <tr>
       <td>15,000-20,000</td>
       <td>394</td>
       <td>6,850,076</td>
       <td>6,922,478</td>
-      <td>25</td>
+      <td>25.34</td>
     </tr>
     <tr>
       <td>20,000-30,000</td>
       <td>395</td>
       <td>9,068,769</td>
       <td>9,460,552</td>
-      <td>20</td>
+      <td>20.18</td>
     </tr>
     <tr>
       <td>30,000-50,000</td>
       <td>182</td>
       <td>6,068,585</td>
       <td>6,450,838</td>
-      <td>17</td>
+      <td>17.42</td>
     </tr>
     <tr>
       <td>50,000-60,000</td>
       <td>21</td>
       <td>1,148,974</td>
       <td>1,133,076</td>
-      <td>13</td>
+      <td>12.67</td>
     </tr>
     <tr>
       <td>60,000+</td>
       <td>80</td>
       <td>5,935,956</td>
       <td>6,253,595</td>
-      <td>14</td>
+      <td>13.50</td>
     </tr>
   </tbody>
 </table>
