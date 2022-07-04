@@ -77,13 +77,13 @@ div{
 	position: absolute;
 	left:220px;
 	top: 30px;
-	width:600px;
+	width:450px;
 	height:800px;
 }	
 	
 .table1{
 	position: absolute;
-	left:850px;
+	left:700px;
 	top: 80px;
 	height: 80px;
 	width:800px;
@@ -92,7 +92,7 @@ div{
 
 .barchart{
 	position: absolute;
-	top: 120px;
+	top: 140px;
 	height: 80px;
 	left:1300px;
 	width:800px;
@@ -102,9 +102,10 @@ div{
 
 .table2{
 	position: absolute;
-	left:850px;
+	left:700px;
 	top: 450px;
 	height: 80px;
+	width:800px;
 	padding: 0px 10px;
 }
 
@@ -137,7 +138,7 @@ div{
 .barchart2{
 	position: absolute;
 	left:1300px;
-	top: 480px;
+	top: 520px;
 	height: 80px;
 	width:800px;
 	padding: 0px 10px;
