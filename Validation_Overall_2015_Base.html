@@ -55,18 +55,13 @@
 
  </head>
     <style>
-
-
-
-
-
     thead {color: black;}
     tbody {color: black;}
     tfoot {color: red;}
     table, th, td {
       border: 1px solid black;
       text-align: center;
-      width: 40%
+      width: 70%
     }
 tr {
   height: 30px;
@@ -128,25 +123,6 @@ tr {
   box-sizing: border-box;
 }
 
-.box {
-  position:absolute;
-  top:55px;
-  width: 45;
-  height:100%;
-}
-.box_1 {
-  position:absolute;
-  top:630px;
-  left:40px;
-  width: 580px;
-  height:30;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
     </style>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <body>
@@ -346,7 +322,7 @@ tr {
 	iconSize: [70,35],
 });
 
-     L.marker([28.039646, -82.420602],{icon: hillsborough}).addTo(map).bindPopup('Hillsborough:  V/C:0.96  RMSE:88.20');
+     L.marker([28.039646, -82.420602],{icon: hillsborough}).addTo(map).bindPopup('Hillsborough:  V/C:0.96  RMSE:34.00');
 	 
 		var pinellas = L.icon({
 	iconUrl: 'images/County/pinellas.png',
@@ -354,27 +330,27 @@ tr {
 
 });
 
-     L.marker([27.907086, -82.759073],{icon: pinellas}).addTo(map).bindPopup('Pinellas:  V/C:0.99  RMSE:40.45');;
+     L.marker([27.907086, -82.759073],{icon: pinellas}).addTo(map).bindPopup('Pinellas:  V/C:0.99  RMSE:30.60');;
 	 
 	var pasco = L.icon({
 	iconUrl: 'images/County/pasco.png',
 	iconSize: [60,60],
 });
-     L.marker([28.295848, -82.471609],{icon: pasco}).addTo(map).bindPopup('Pasco:  V/C:0.90  RMSE:32.30');;	 
+     L.marker([28.295848, -82.471609],{icon: pasco}).addTo(map).bindPopup('Pasco:  V/C:0.90  RMSE:36.43');;	 
 	 
 	 	var hernando = L.icon({
 	iconUrl: 'images/County/hernando.png',
 	iconSize: [60,60],
 });
 
-     L.marker([28.566409, -82.471609],{icon: hernando}).addTo(map).bindPopup('Hernando:  V/C:1.11  RMSE:25.34');;
+     L.marker([28.566409, -82.471609],{icon: hernando}).addTo(map).bindPopup('Hernando:  V/C:1.11  RMSE:44.99');;
 	 
 	 	var citrus = L.icon({
 	iconUrl: 'images/County/citrus.png',
 	iconSize: [60,60],
 });
 
-     L.marker([28.785449, -82.471609],{icon: citrus}).addTo(map).bindPopup('Citrus:  V/C:1.04  RMSE:20.18');;
+     L.marker([28.785449, -82.471609],{icon: citrus}).addTo(map).bindPopup('Citrus:  V/C:1.04  RMSE:55.09');;
 	 
 	 
 	 
@@ -438,8 +414,8 @@ new Chart("myChart_1", {
     },
 });
 
-var xValues1 = ['0-5,000','5,000-10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-50,000','50,000-60,000','60,000+'];
-var yValues1=['88.20','40.45','32.30','25.34','20.18','17.42','12.67','13.50'];
+var xValues1 = ['Hillsborough','Pinellas','Pasco','Hernando','Citrus','Others','Study Area'];
+var yValues1=['34.00','30.60','36.43','44.99','55.09','41.07','34.49'];
 
 new Chart("myChart_2", {
   type: "bar",
@@ -536,69 +512,106 @@ new Chart("myChart_2", {
     RMSE by Volume Group</h3><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Volume_Group</th>
-      <th>Number of Links</th>
-      <th>Volume</th>
-      <th>Count</th>
-      <th>RMSE</th>
+      <th></th>
+      <th>Hillsborough</th>
+      <th>Pinellas</th>
+      <th>Pasco</th>
+      <th>Hernando</th>
+      <th>Citrus</th>
+      <th>Others</th>
+      <th>Study Area</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>0-5,000</td>
-      <td>2,084</td>
-      <td>5,915,215</td>
-      <td>5,408,113</td>
+      <th>&lt;5k</th>
+      <td>87.02</td>
+      <td>89.87</td>
+      <td>64.64</td>
+      <td>95.13</td>
+      <td>103.79</td>
+      <td>98.33</td>
       <td>88.20</td>
     </tr>
     <tr>
-      <td>5,000-10,000</td>
-      <td>1,173</td>
-      <td>7,822,324</td>
-      <td>8,313,030</td>
+      <th>5k-10k</th>
+      <td>42.01</td>
+      <td>38.18</td>
+      <td>36.65</td>
+      <td>34.96</td>
+      <td>48.69</td>
+      <td>63.93</td>
       <td>40.45</td>
     </tr>
     <tr>
-      <td>10,000-15,000</td>
-      <td>646</td>
-      <td>7,715,732</td>
-      <td>7,873,798</td>
+      <th>10k-15k</th>
+      <td>34.88</td>
+      <td>31.91</td>
+      <td>31.29</td>
+      <td>20.45</td>
+      <td>20.41</td>
+      <td>20.35</td>
       <td>32.30</td>
     </tr>
     <tr>
-      <td>15,000-20,000</td>
-      <td>394</td>
-      <td>6,850,076</td>
-      <td>6,922,478</td>
+      <th>15k-20k</th>
+      <td>24.28</td>
+      <td>25.12</td>
+      <td>29.37</td>
+      <td>26.74</td>
+      <td>39.82</td>
+      <td>11.43</td>
       <td>25.34</td>
     </tr>
     <tr>
-      <td>20,000-30,000</td>
-      <td>395</td>
-      <td>9,068,769</td>
-      <td>9,460,552</td>
+      <th>20k-30k</th>
+      <td>20.28</td>
+      <td>19.93</td>
+      <td>17.17</td>
+      <td>8.01</td>
+      <td>NaN</td>
+      <td>43.72</td>
       <td>20.18</td>
     </tr>
     <tr>
-      <td>30,000-50,000</td>
-      <td>182</td>
-      <td>6,068,585</td>
-      <td>6,450,838</td>
+      <th>30k-50k</th>
+      <td>18.11</td>
+      <td>14.76</td>
+      <td>24.17</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>16.28</td>
       <td>17.42</td>
     </tr>
     <tr>
-      <td>50,000-60,000</td>
-      <td>21</td>
-      <td>1,148,974</td>
-      <td>1,133,076</td>
+      <th>50k-60k</th>
+      <td>14.83</td>
+      <td>6.01</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>12.67</td>
     </tr>
     <tr>
-      <td>60,000+</td>
-      <td>80</td>
-      <td>5,935,956</td>
-      <td>6,253,595</td>
+      <th>60+</th>
+      <td>13.35</td>
+      <td>14.56</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>13.50</td>
+    </tr>
+    <tr>
+      <th>Areawide</th>
+      <td>34.00</td>
+      <td>30.60</td>
+      <td>36.43</td>
+      <td>44.99</td>
+      <td>55.09</td>
+      <td>41.07</td>
+      <td>34.49</td>
     </tr>
   </tbody>
 </table>
