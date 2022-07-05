@@ -81,6 +81,14 @@ div{
 	height:800px;
 }	
 	
+.map_gen{
+	position: absolute;
+	left:300px;
+	top: 350px;
+	width:450px;
+	height:500px;
+}	
+
 .table1{
 	position: absolute;
 	left:700px;
@@ -112,7 +120,7 @@ div{
 .generation1{
 	position: absolute;
 	left:220px;
-	top: 20px;
+	top: 15px;
 	height: 150px;
 	padding: 0px 10px;
 }
@@ -120,7 +128,7 @@ div{
 .generation2{
 	position: absolute;
 	left:1020px;
-	top: 20px;
+	top: 15px;
 	height: 150px;
 	padding: 0px 10px;
 }
@@ -129,7 +137,7 @@ div{
 	position: absolute;
 	top: 400px;
 	height: 80px;
-	left:600px;
+	left:800px;
 	width:800px;
 	padding: 0px 10px;
 }
@@ -211,5 +219,7 @@ div{
 		#custom-search-input .glyphicon-search{
 			font-size: 23px;
 		}
+	
+	
 		
 
